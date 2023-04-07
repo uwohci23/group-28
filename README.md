@@ -6,7 +6,14 @@ The redesigned game is redesigned using the PyGame library
 
 the redesigned game is freezed into executable files using cx_Freeze
 
-There are three folders:
+## **Group Members:**
+
+1. Aaryan Krishna
+2. Yash Nayankumar Chavda
+3. Jehil Thakkar
+4. Kimia Ketabfoorosh
+
+There are three folders uploaded in the repo:
 
 ## **Raw_Code_Files:** 
 This folder contains the redesigned source code with our added features. The code is in the main.py file, and the rest of the game files are located in the bin folder. To run the game, follow the steps mentioned below:
