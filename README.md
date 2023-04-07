@@ -18,7 +18,9 @@ There are three folders uploaded in the repo:
 ## **Raw_Code_Files:** 
 This folder contains the redesigned source code with our added features. The code is in the main.py file, and the rest of the game files are located in the bin folder. To run the game, follow the steps mentioned below:
 
-1. Install the PyGame library by using the command:
+1. Have python installed on your system. If you do not have python installed, please go the below link and install [Python](https://www.python.org/downloads/)
+2. Make sure to have pip installed by looking at the [documentation](https://pip.pypa.io/en/stable/cli/pip_install/)
+3. Install the PyGame library by using the command:
 '''
 pip install pygame
 '''
