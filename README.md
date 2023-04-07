@@ -1,12 +1,12 @@
 # **Group 28**
 
-HCI Redesign of a 2D car game
+Redesign of a basic car game using HCI Principles
 
 The redesigned game is redesigned using the PyGame library
 
 the redesigned game is freezed into executable files using cx_Freeze
 
-There are two folders:
+There are three folders:
 
 ## **Raw_Code_Files:** 
 This folder contains the redesigned source code with our added features. The code is in the main.py file, and the rest of the game files are located in the bin folder. To run the game, follow the steps mentioned below:
