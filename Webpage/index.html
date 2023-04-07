@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <title>Document</title>
+  <script>
+    function magnify(imgID, zoom) {
+      var img, glass, w, h, bw;
+      img = document.getElementById(imgID);
+      /*create magnifier glass:*/
+      glass = document.createElement("DIV");
+      glass.setAttribute("class", "img-magnifier-glass");
+      /*insert magnifier glass:*/
+      img.parentElement.insertBefore(glass, img);
+      /*set background properties for the magnifier glass:*/
+      glass.style.backgroundImage = "url('" + img.src + "')";
+      glass.style.backgroundRepeat = "no-repeat";
+      glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+      bw = 3;
+      w = glass.offsetWidth / 2;
+      h = glass.offsetHeight / 2;
+      /*execute a function when someone moves the magnifier glass over the image:*/
+      glass.addEventListener("mousemove", moveMagnifier);
+      img.addEventListener("mousemove", moveMagnifier);
+      /*and also for touch screens:*/
+      glass.addEventListener("touchmove", moveMagnifier);
+      img.addEventListener("touchmove", moveMagnifier);
+      function moveMagnifier(e) {
+        var pos, x, y;
+        /*prevent any other actions that may occur when moving over the image*/
+        e.preventDefault();
+        /*get the cursor's x and y positions:*/
+        pos = getCursorPos(e);
+        x = pos.x;
+        y = pos.y;
+        /*prevent the magnifier glass from being positioned outside the image:*/
+        if (x > img.width - (w / zoom)) { x = img.width - (w / zoom); }
+        if (x < w / zoom) { x = w / zoom; }
+        if (y > img.height - (h / zoom)) { y = img.height - (h / zoom); }
+        if (y < h / zoom) { y = h / zoom; }
+        /*set the position of the magnifier glass:*/
+        glass.style.left = (x - w) + "px";
+        glass.style.top = (y - h) + "px";
+        /*display what the magnifier glass "sees":*/
+        glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+      }
+      function getCursorPos(e) {
+        var a, x = 0, y = 0;
+        e = e || window.event;
+        /*get the x and y positions of the image:*/
+        a = img.getBoundingClientRect();
+        /*calculate the cursor's x and y coordinates, relative to the image:*/
+        x = e.pageX - a.left;
+        y = e.pageY - a.top;
+        /*consider any page scrolling:*/
+        x = x - window.pageXOffset;
+        y = y - window.pageYOffset;
+        return { x: x, y: y };
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="navbar">
+      <a href="#introduction">Intro</a>
+      <a href="#summary">Summary</a>
+      <a href="#navigation-map">Navigational Map</a>
+      <a href="#assets">Game Assets</a>
+      <a href="#principles">Design Principles</a>
+      <a href="#evaluation">Evaluation</a>
+      <a href="#recommendations">Recommendations</a>
+      <a href="https://github.com/uwohci23/group-28">Github</a>
+
+
+    </div>
+
+    <div class="intro" id="introduction">
+      <div class="intro-heading">
+        <h1>Introduction</h1>
+      </div>
+      <div class="intro-content">
+        <div class="intro-text">
+          <p>Hi, We are group 28 and we have...</p>
+          <h1>Redesigned the road fighter :)</h1>
+          <p>
+            Road fighter is a 2D car game which we recreated using HCI principles.
+          </p>
+        </div>
+        <div class="intro-image">
+          <img class="image1" src="./images/intro-image.png"></img>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary" id="summary">
+      <div class="summary-heading">
+        <h1>Summary</h1>
+      </div>
+      <div class="summary-content">
+        <div class="summary-text">
+          <p>Our newly redesigned 2D racing game aims to deliver an engaging, immersive, and user-friendly gaming
+            experience. We have re-designed the previous basic web-based car game, which had limited features, with a
+            more comprehensive and interactive game that caters to different players' preferences and styles.
+            <br>
+            <br>
+            Our design process focused on redesigning the previous game with the user in mind, adhering to over 20
+            design principles, including principles related to usability, accessibility, and visual design. We have also
+            conducted a heuristic evaluation of the system using a set of heuristics med at improving usability and user
+            experience.
+            In the following sections, we will provide a navigational map of the system, a detailed list of the design
+            principles we used, a final analytical (heuristic) evaluation of the system, and our recommendations for how
+            the system can be improved.
+            <br>
+            <br>
+            <b>Key features:</b>
+          </p>
+        </div>
+        <div class="summary-features">
+          <p><b>Improved User Experience</b>: The new game offers a number of options that allow players to customise
+            and immerse themselves in the experience, such as controlling in-game music and sound effects,
+            enabling/disabling animations, changing resolution, and muting volume.</p>
+          <p><b>Interesting Maps</b>: With ten different maps, players can choose from a range of racing settings, which
+            keeps the gameplay interesting and fun.</p>
+          <p><b>Diverse Vehicle Options</b>: Players have a choice of five different vehicle types, each with their own
+            special features, making for a more individualised and interesting driving experience.</p>
+          <p><b>Customizable Enemy Cars</b>: Players can choose the quantity, kind, and colour of enemy cars in the
+            game, which adds another level of strategy and difficulty.</p>
+          <p><b>Single and Dual Player Modes</b> For more excitement, players can play the game in single-player mode or
+            in dual-player mode with a buddy.</p>
+          <p>Users have the opportunity to select their starting positions, which gives the game play an additional
+            layer of strategy.</p>
+          <p><b>Multiplayer Customization</b> For a distinctive and competitive gaming experience in multiplayer mode,
+            players can choose their starting places and modify their cars.</p>
+          <p><b>In-Game Mechanics</b>: The game shows player rankings and vehicle damage while it is being played,
+            giving players important feedback and increasing their level of involvement.</p>
+          <p><b>Realistic Damage System</b>: The game's damage is not just superficial; it also impacts how well the
+            cars perform, which gives the gameplay an extra depth of realism and strategy.</p>
+          <p><b>Power-ups</b>: Players can choose from four different kinds of power-ups to improve their gaming
+            experience and add an extra layer of strategy.</p>
+          <p><b>Control Options</b>: Players have the option of using the arrow keys or the WASD keys to operate the
+            game, depending on their preferences.</p>
+          <p><b>Redesigned Dashboard and UI</b>: The game's dashboard and user interface have been updated to provide a
+            more aesthetically pleasing and user-friendly experience.</p>
+          <p><b>Consistent Animations</b>: The use of appropriate animations has made for a smoother and more pleasant
+            gaming experience.</p>
+          <p><b>Consistent Animations</b>: The use of appropriate animations makes for a better and more pleasurable
+            gaming experience.</p>
+          <p><b>Player rankings at the conclusion of each race</b>: This feature adds a competitive aspect and enables
+            players to monitor their advancement.</p>
+          <p><b>Resolution Flexibility</b>: By giving players with older devices the opportunity to change the window
+            resolution, the game is made available to a larger audience.</p>
+        </div>
+        <div class="summary-image">
+          <!-- <img class="image1" src="./images/intro-image.png"></img> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-map" id="navigation-map">
+      <div class="nav-map-heading">
+        <h1>Navigational Maps</h1>
+      </div>
+      <div class="img-magnifier-container">
+        <img id="myimage" src="./images/gameflowchart.png" width="100%">
+      </div>
+
+      <div class="flowchart-container">
+        <div class="flowchart">
+          <img src="./images/flowchart.png" alt=":(">
+        </div>
+      </div>
+    </div>
+
+    <div class="game-assets" id="assets">
+      <div class="game-assets-heading">
+        <h1>Assets</h1>
+      </div>
+      <div class="game-assets-content">
+        <p><b> In-Game Maps : </b></p>
+      </div>
+
+      <div class="game-assets-image">
+        <div class="game-assets-image-container">
+          <img class="mySlides" src="./images/map1.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map2.png" style="width:64%">
+          <img class="mySlides" src="./images/map3.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map4.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map5.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map6.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map7.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map8.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map9.png" style="width:64%;display:none">
+          <img class="mySlides" src="./images/map10.png" style="width:64%;display:none">
+        </div>
+        <p>Select any map for closer look</p>
+
+        <div class="game-assets-image-sub-image">
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map1.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(1)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map2.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(2)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map3.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(3)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map4.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(4)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map5.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(5)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map6.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(6)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map7.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(7)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map8.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(8)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map9.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(9)">
+          </div>
+          <div class="w3-col s4">
+            <img class="demo w3-opacity w3-hover-opacity-off" src="./images/map10.png" style="width:100%;cursor:pointer"
+              onclick="currentDiv(10)">
+          </div>
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="game-assets-content">
+        <p><b> In-Game Cars : </b></p>
+      </div>
+
+      <div class="cars myslide-car">
+        <div class="all-cars">
+          <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+          <div class="fam-car-image ">
+            <img class="mySlides1" id="show-image" src="./images/famcar1.png" alt="sorry :(">
+          </div>
+          <!-- <div class="fam-car-image myslide-car">
+          <img class="mySlides1" id="show-image" src="./images/spocar1.png" alt="sorry :(">
+        </div> -->
+          <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <p>Click any color to change & side arrows to toggle</p>
+        <div class="buttons">
+          <button id="btn1" onclick="document.getElementById('show-image').src='./images/famcar1.png'"></button>
+          <button id="btn2" onclick="document.getElementById('show-image').src='./images/famcar2.png'"></button>
+          <button id="btn3" onclick="document.getElementById('show-image').src='./images/famcar3.png'"></button>
+          <button id="btn4" onclick="document.getElementById('show-image').src='./images/famcar4.png'"></button>
+          <button id="btn5" onclick="document.getElementById('show-image').src='./images/famcar5.png'"></button>
+        </div>
+      </div>
+
+      <div class="cars myslide-car">
+        <div class="all-cars">
+          <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+          <div class="fam-car-image ">
+            <img class="mySlides1" id="show-image1" src="./images/spocar1.png" alt="sorry :(">
+          </div>
+          <!-- <div class="fam-car-image myslide-car">
+          <img class="mySlides1" id="show-image" src="./images/spocar1.png" alt="sorry :(">
+        </div> -->
+          <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <p>Click any color to change & side arrows to toggle</p>
+        <div class="buttons">
+          <button id="btn1" onclick="document.getElementById('show-image1').src='./images/spocar1.png'"></button>
+          <button id="btn2" onclick="document.getElementById('show-image1').src='./images/spocar2.png'"></button>
+          <button id="btn3" onclick="document.getElementById('show-image1').src='./images/spocar3.png'"></button>
+          <button id="btn4" onclick="document.getElementById('show-image1').src='./images/spocar4.png'"></button>
+          <button id="btn5" onclick="document.getElementById('show-image1').src='./images/spocar5.png'"></button>
+        </div>
+      </div>
+
+      <div class="cars myslide-car">
+        <div class="all-cars">
+          <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+          <div class="fam-car-image ">
+            <img class="mySlides1" id="show-image2" src="./images/luxcar1.png" alt="sorry :(">
+          </div>
+          <!-- <div class="fam-car-image myslide-car">
+          <img class="mySlides1" id="show-image" src="./images/spocar1.png" alt="sorry :(">
+        </div> -->
+          <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <p>Click any color to change & side arrows to toggle</p>
+        <div class="buttons">
+          <button id="btn1" onclick="document.getElementById('show-image2').src='./images/luxcar1.png'"></button>
+          <button id="btn2" onclick="document.getElementById('show-image2').src='./images/luxcar2.png'"></button>
+          <button id="btn3" onclick="document.getElementById('show-image2').src='./images/luxcar3.png'"></button>
+          <button id="btn4" onclick="document.getElementById('show-image2').src='./images/luxcar4.png'"></button>
+          <button id="btn5" onclick="document.getElementById('show-image2').src='./images/luxcar5.png'"></button>
+        </div>
+      </div>
+
+      <div class="cars myslide-car">
+        <div class="all-cars">
+          <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+          <div class="fam-car-image ">
+            <img class="mySlides1" id="show-image3" src="./images/trucar1.png" alt="sorry :(">
+          </div>
+          <!-- <div class="fam-car-image myslide-car">
+          <img class="mySlides1" id="show-image" src="./images/spocar1.png" alt="sorry :(">
+        </div> -->
+          <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+        <p>Click any color to change & side arrows to toggle</p>
+        <div class="buttons">
+          <button id="btn1" onclick="document.getElementById('show-image3').src='./images/trucar1.png'"></button>
+          <button id="btn2" onclick="document.getElementById('show-image3').src='./images/trucar2.png'"></button>
+          <button id="btn3" onclick="document.getElementById('show-image3').src='./images/trucar3.png'"></button>
+          <button id="btn4" onclick="document.getElementById('show-image3').src='./images/trucar4.png'"></button>
+          <button id="btn5" onclick="document.getElementById('show-image3').src='./images/trucar5.png'"></button>
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="upgrades">
+        <p><b>In-game boosts:</b></p>
+
+        <div class="grid-portefolio">
+
+          <div class="upgrades-container">
+            <img src="./images/boost.png" class="image" alt="" style="scale: 0.5;">
+            <div class="overlay">
+              <div class="projeto01">Boost: Speeds up car for few seconds.</div>
+            </div>
+          </div>
+
+          <div class="upgrades-container">
+            <img src="./images/debris.png" class="image" alt="" style="scale: 0.5;">
+            <div class="overlay">
+              <div class="projeto01">Debris: Stops the car for few seconds and damages the car.</div>
+            </div>
+          </div>
+
+          <div class="upgrades-container">
+            <img src="./images/lightning.png" class="image" alt="" style="scale: 0.5;">
+            <div class="overlay">
+              <div class="projeto01">Lightning: The car with symbol next to it gets hit and stops for few seconds if any
+                player gets it.</div>
+            </div>
+          </div>
+
+          <div class="upgrades-container">
+            <img src="./images/repair.png" class="image" alt="" style="scale: 0.5;">
+            <div class="overlay">
+              <div class="projeto01">Repair: Repairs the car and sets the speed back to normal.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>Hover over image for description</p>
+    </div>
+
+
+    <div class="principles" id="principles">
+      <div class="principles-heading">
+        <h1>Design Principles</h1>
+      </div>
+      <div class="principles-content">
+        <button class="accordion">1 Visibility</button>
+        <div class="panel">
+          <p>The principle of system status visibility is essential for enhancing user satisfaction and enabling a
+            fluid,
+            captivating, and immersive gaming experience. It guarantees that players are constantly conscious of their
+            advancement,
+            the state of the game, and the effects of their choices. To guarantee a seamless, captivating, and immersive
+            gameplay
+            experience, the new game must adhere to the design principle of visibility in HCI. The game adheres to this
+            concept in
+            several ways, including in-game mechanics that display ranking and damage, appropriate animations, player
+            rankings end
+            screen, a settings button, and customization choices. To improve the user experience, these features offer
+            real-time
+            feedback, distinct visual cues, and simple customization choices. With the addition of these features, the
+            new game
+            vastly outperforms its predecessor and boosts user experience all around. By giving players access to the
+            information
+            they need to make wise choices and improve the gameplay experience, the principle of system status
+            visibility is
+            essential to this improvement.</p>
+        </div>
+
+        <button class="accordion">2 Feedback</button>
+        <div class="panel">
+          <p>The design principle of feedback in HCI is vital for creating engaging, user-friendly, and satisfying
+            experiences. Users
+            can comprehend the effects of their activities and modify their strategies as necessary. Feedback is
+            especially
+            important in game design because it informs players about their performance, progress, and the general
+            health of the
+            game. This game's mechanics, which display player rankings and damage, proper animations, a leaderboard at
+            the
+            conclusion, sound effects and music, customization options, and control preferences all adhere to this
+            concept. The user
+            experience is improved by these features, which offer real-time, precise, and varied feedback methods. The
+            position
+            feedback informs the user about their present location in the game, allowing them to adjust their strategy,
+            while
+            the score provides immediate feedback on the users' performance, indicating their degree of success or
+            failure. The user
+            is informed of the results of their activities through outcome feedback, such as whether they have finished
+            a lap or won
+            the game. The new game vastly improves upon the previous one and improves user experience generally by
+            incorporating
+            efficient and timely feedback mechanisms. In order to create an engaging and satisfying gaming experience
+            that increases
+            user engagement and satisfaction, the design principle of feedback in HCI is crucial.</p>
+        </div>
+
+        <button class="accordion">3 Constraints</button>
+        <div class="panel">
+          <p>In user interface design, constraints allude to purposeful limitations or restrictions incorporated into
+            the system to
+            direct user actions and behaviour. These limitations are crucial in assisting users in comprehending the
+            system's
+            guidelines and restrictions, encouraging strategic thinking and original problem-solving. In order to design
+            engaging,
+            convenient, and tactically difficult gameplay experiences, the new game heavily relies on the design
+            principle of
+            constraints in HCI. This concept is followed by the game's car customization, map customization, enemy car
+            customization, single and multiplayer modes, power-ups, and start position customization. Due to these
+            limitations,
+            users must plan ahead and choose their racing strategy wisely. The new game encourages players to use
+            strategy and make
+            knowledgeable choices regarding their gameplay by incorporating well-designed constraints, creating a more
+            gratifying
+            and immersive gaming experience. Effective limits can improve users' problem-solving abilities and make
+            gaming more
+            difficult and interesting.</p>
+        </div>
+      </div>
+
+      <button class="accordion">4 Mapping</button>
+      <div class="panel">
+        <p>The connection between user actions and system responses is the mapping principle of design in human-computer
+          interaction. It's essential for designing an intuitive and accessible game interface that makes it simple for
+          players to comprehend and play the game. A number of features in the new game, including the control scheme,
+          the choice of vehicle and map, the redesign of the dashboard and user interface, and the visual feedback,
+          serve as examples of mapping. The game offers players a familiar and simple control system by letting them
+          choose between using the arrow keys or the WASD keys to drive the cars. Users can make well-informed
+          judgements about their choices thanks to the uniform and transparent visual presentation of the options for
+          choosing a car, a map, and an enemy car, as well as the mapping between these choices and the gameplay. The
+          game's redesigned dashboard and user interface (UI) have improved the mapping of each element's purpose and
+          function with a clear and uniform navigational structure, well-labeled pages, and buttons.</p>
+      </div>
+
+      <button class="accordion">5 Consistency</button>
+      <div class="panel">
+        <p>To guarantee a seamless and satisfying experience, the design principle of consistency is applied in a number
+          of
+          different ways. As a result of the game's use of visual, functional, terminology, feedback, and navigation
+          consistency,
+          users are better able to create mental models of how the system functions, which lowers the learning curve and
+          improves
+          usability. Color schemes, typography, iconography, and button styles are all kept consistent throughout the
+          game, which
+          gives it a unified aesthetic and makes it aesthetically appealing and simple to navigate. By offering
+          comparable actions
+          or tasks using the same controls and mechanisms, functional consistency is guaranteed. In addition, the game
+          consistently provides feedback regarding ranking, car damage, and power-up impacts. While maintaining
+          consistency in
+          navigation across pages and menus, which enables players to access different
+          settings and options quickly and easily, the consistent feedback assists players in understanding the effects
+          of their
+          actions and enabling them to make informed decisions during gameplay.</p>
+      </div>
+
+      <button class="accordion">6 Affordances</button>
+      <div class="panel">
+        <p>The visual or physical characteristics of an object that indicate its potential uses or actions are known as
+          affordances
+          in user interface design. These attributes can help users understand what kinds of interactions are possible.
+          The car
+          and map selection screens provide visual representations to help players predict obstacles and features, and
+          the game
+          uses clear and recognizable icons and buttons to indicate their respective functions. Additionally, the game
+          offers a
+          variety of control methods and includes various power-ups with distinctive visual representations that clearly
+          convey
+          their functions. A visual representation of the vehicle's current state is provided by in-game mechanics that
+          display
+          car damage, letting players know how it will affect their performance. These features produce a clear and
+          user-friendly
+          interface that encourages greater game involvement and enjoyment.</p>
+      </div>
+
+      <button class="accordion">7 Alignment</button>
+      <div class="panel">
+        <p>A user interface's visual organization and structure depend heavily on the alignment principle of design in
+          human-computer interaction (HCI). According to this principle, elements should be positioned and arranged
+          consistently
+          and orderly to give the interface a feeling of harmony and order that makes it simple for users to use and
+          comprehend.
+          We incorporated alignment in our redesigned racing game's various components, including buttons, menu items,
+          text,
+          images, and in-game objects like ranking displays and damage indicators. We have developed a visually
+          appealing and
+          user-friendly gaming experience that enables players to quickly navigate and interact with the interface by
+          guaranteeing
+          consistent alignment. This design concept benefits players by making the gaming experience more polished and
+          enjoyable.</p>
+      </div>
+
+      <button class="accordion">8 Progressive disclosure</button>
+      <div class="panel">
+        <p>In order to reduce cognitive load and enhance user experience, progressive disclosure is a design concept
+          that is used
+          to gradually present information and options to users. Progressive disclosure has been used in our redesigned
+          racing
+          game to gradually introduce game features and intricacy. A dedicated Settings menu, a clear and organized map
+          and
+          vehicle selection, the gradual introduction of game mechanics, and the display of the results screen after the
+          race are
+          a few examples. By utilizing progressive disclosure, we were able to develop a more user-friendly and
+          entertaining
+          gaming environment that catered to players with different levels of familiarity and skill. This helped to
+          clear up any
+          confusion and enhanced the overall gaming experience for all players.</p>
+      </div>
+
+      <button class="accordion">9 Accessibility</button>
+      <div class="panel">
+        <p>The design principle of accessibility in game design refers to making the game easy to use and enjoyable for
+          users with
+          varying abilities. Accessibility is an essential consideration in the design of our 2D racing game. The game's
+          interface
+          has been developed with features that cater to a diverse range of players with different abilities,
+          preferences, and
+          needs. These features include customizable controls, clear and legible text, adjustable audio settings, color
+          customization, alternative visual indicators, a simplified gameplay option, and scalable resolution. These
+          features
+          provide flexibility and customization for players with different input preferences or physical limitations,
+          visual or
+          hearing impairments, cognitive
+          disabilities, or older devices. The implementation of these accessibility features promotes a more inclusive
+          and
+          satisfying gaming experience, reducing frustration and increasing enjoyment for all players, regardless of
+          their
+          abilities or limitations.</p>
+      </div>
+
+      <button class="accordion">10 Context</button>
+      <div class="panel">
+        <p>Designing the game to fit within the context of the user's expectations and preferences for a particular
+          style of game
+          is referred to as the design principle of context in game design. This is accomplished by including options
+          and features
+          that are pertinent to and anticipated by players of this type of game. Game designers may carry out user
+          testing and
+          market study to enhance context. The goal is to improve user happiness, retention, and differentiation of the
+          game in a
+          crowded market by developing a more engaging and gratifying gaming experience that caters to the needs and
+          wants of the
+          target audience. The game is made with features and settings that are appropriate for users' standards within
+          the
+          framework of an 2D car racing game, such as the in-game car mechanics and the various customization options
+          provided in
+          the redesign of our game.</p>
+      </div>
+
+      <button class="accordion">11 Fitts’s Law</button>
+      <div class="panel">
+        <p>Applying Fitts’s Law to the creation of 2D racing games can make them more user-friendly and productive. To
+          minimize the
+          time and effort needed for players to interact with the game, interactive components like buttons, menus, and
+          power-ups
+          must be sized and positioned as efficiently as possible. We have minimized the distance players must move
+          their pointer
+          between choices, reducing the time and effort required for players to navigate the menu system by designing
+          larger
+          buttons and grouping related options together. Additionally, in order to suit different user preferences and
+          enhance the
+          player's ability to control their vehicle quickly and precisely while playing, we have provided alternate
+          control
+          schemes like arrow keys and WASD keys.</p>
+      </div>
+
+      <button class="accordion">12 Transfer</button>
+      <div class="panel">
+        <p>By enabling users to transfer their knowledge and skills from one context or system to another, the design
+          principle of
+          transfer in human-computer interaction seeks to improve the user experience's efficiency and intuitiveness.
+          This idea
+          has been applied to the redesigned racing game in order to make it more approachable and enjoyable for players
+          of all
+          ability levels. This has been done by incorporating recognizable controls, common icons, consistent menu
+          structures,
+          common game features, and intuitive UI design. The game's mechanics and interface are made to be more
+          understandable by
+          drawing on players' prior experiences and knowledge, which eventually increases user engagement and
+          satisfaction.</p>
+      </div>
+
+      <button class="accordion">13 Representations</button>
+      <div class="panel">
+        <p>The human-computer interaction (HCI) design concept of representations emphasizes how information and
+          functionality are
+          visually displayed and represented to users. Users can swiftly and accurately comprehend the system, its
+          features, and
+          the possible actions they can take thanks to effective representations. The creation of user interfaces that
+          are
+          engaging and satisfying to users requires the use of representations in order to make them simple, effective,
+          and
+          beautiful. By presenting information and interface elements in a straightforward, well-organized, and
+          aesthetically
+          pleasing way, the application of the principle of representations can greatly improve the user experience in
+          the context
+          of the new 2D racing game. Clear icons and labels, a visual order, a visual language that is uniform,
+          contextual
+          representations, dynamic information representation, animation and visual
+          feedback, and responsive design are a few examples of how this principle has been applied in the redesign of
+          the game.</p>
+      </div>
+
+      <button class="accordion">14 Control </button>
+      <div class="panel">
+        <p>The human-computer interaction (HCI) principle of control emphasizes the significance of granting users the
+          ability to
+          initiate, modify, and terminate activities within a system. Making interfaces that are simple to use,
+          effective, and
+          enjoyable while also adjusting to the preferences and requirements of specific users is a crucial component of
+          usability. Implementing the principle of control ensures that players have autonomy and customization options,
+          allowing
+          them to adapt the game to their tastes and skill levels in the context. The design of the game allows players
+          to
+          customise the settings, the map, the car, the opponent, the start location, the multiplayer option, the
+          control scheme,
+          the real-time feedback and adjustments, and the availability of power-ups. Players have complete control over
+          creating a
+          custom gaming experience that matches their tastes thanks to all of these design elements. Giving users
+          authority
+          promotes empowerment, engagement, and satisfaction, which, in turn, makes gaming more enjoyable and immersive
+          for all
+          participants.</p>
+      </div>
+
+      <button class="accordion">15 Gestalt Principles</button>
+      <div class="panel">
+        <p>Gestalt design principles can improve the entire gaming experience in the context of the redesigned racing
+          game by
+          making the interface more user-friendly, intuitive, and visually pleasing. While common fate is demonstrated
+          by creating
+          consistent animations and transitions for similar elements (such as car movement, power-up activation),
+          proximity is
+          achieved by grouping related options and controls together close together in the game's settings menu so that
+          players
+          can quickly identify the functions and navigate the menu more efficiently.</p>
+      </div>
+
+      <button class="accordion">16 Metaphors</button>
+      <div class="panel">
+        <p>Metaphors are a significant design principle that makes use of users' prior knowledge and experiences to make
+          displays
+          more understandable and comfortable. Designers use visual, auditory, or conceptual metaphors to depict
+          abstract or
+          complicated digital capabilities. Using well-known car images to symbolize car selection and well-known sound
+          effects to
+          create an authentic racing environment are just a couple of metaphors that have been used in the design of our
+          game. By
+          incorporating metaphors, the game has been made more approachable and enjoyable for a variety of players by
+          lowering the
+          learning curve and cognitive burden.</p>
+      </div>
+
+      <button class="accordion">17 Causality</button>
+      <div class="panel">
+        <p>The causality design principle emphasizes the significance of immediate and obvious cause-and-effect
+          connections between
+          user activities and system responses. Causality can increase user happiness, lower error rates, and lessen
+          confusion by
+          delivering feedback that is predictable, dependable, and quick. The redesigned racing game incorporates
+          causality in a
+          number of ways, including by giving players immediate feedback on car damage, power-up effects, and player
+          rankings as
+          well as by demonstrating obvious cause-and-effect connections between control schemes and car movements. The
+          effect of
+          collisions, acceleration, and sharp turns have all been indicated by audio cues, thus making the whole game
+          more
+          immersing.</p>
+      </div>
+
+      <button class="accordion">18 Familiarity</button>
+      <div class="panel">
+        <p>Familiarity is a design principle in human-computer interaction (HCI) that helps users understand and
+          navigate a system
+          by using familiar concepts, interfaces, and interaction techniques. Designers can produce more intuitive and
+          user-friendly products, lower the learning curve, and improve overall user happiness by drawing on users'
+          prior
+          knowledge and experiences. The concept of familiarity has been used in the redesigned racing game in a variety
+          of ways,
+          including by giving players familiar control schemes in the form of arrow keys or WASD, incorporating
+          well-known game
+          mechanics and visual cues, and including both single and dual player modes.</p>
+      </div>
+
+      <button class="accordion">19 Hick’s Law</button>
+      <div class="panel">
+        <p>According to Hick's Law, fewer options and less intricacy can help people make decisions more quickly and
+          have a better
+          overall user experience. This principle suggests that making options simpler and reducing complexity can
+          result in
+          quicker decision-making and a more seamless user experience. It is especially pertinent when creating user
+          interfaces
+          and game elements. For instance, in the redesigned racing game, fewer maps, a manageable selection of cars and
+          power-ups, and a straightforward choice between arrow keys and WASD controls have sped up decision-making,
+          catered to a
+          variety of user preferences, and made for a more effective and enjoyable playing experience.</p>
+      </div>
+
+      <button class="accordion" style="border-radius: 0 0 20px 20px;">20 Flexibility</button>
+      <div class="panel">
+        <p>Flexibility is a key design concept that enables a system to accommodate a range of user preferences and
+          skill levels.
+          Flexibility is incorporated into the design of the redesigned racing game through a variety of features,
+          including
+          numerous maps, vehicle selection, power-up options, and control scheme options. The game can adapt to various
+          user
+          requirements and hardware constraints by giving users options and settings to customize their gaming
+          experience, which
+          increases user satisfaction and engagement. A layer of personalization is added to the game through features
+          like
+          adjustable start locations, customizable enemy cars, and multiplayer customization, which let players design
+          their own
+          racing scenarios. Overall, flexibility in game creation is essential for producing a pleasurable and
+          accessible gaming
+          experience.</p>
+      </div>
+    </div>
+
+    <div class="evaluation" id="evaluation">
+      <div class="evaluation-heading">
+        <h1>Evaluation</h1>
+      </div>
+
+      <div class="evaluation-content">
+        <p>In general, our system ought to meet many of Nielsen Norman's 10 heuristics and has been designed with the
+          user's needs
+          and goals in mind, providing a satisfying and enjoyable user experience. However, there may be areas where
+          further
+          improvements could be made, such as improving the feedback and help systems, and ensuring consistency in the
+          user
+          interface. Below, is a heuristic evaluation of our redesign utilizing Nielsen Norman's heuristics:</p>
+
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Visibility of system status</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>The new game's in-game mechanics display player rankings and automobile damage, keeping players updated
+                on their
+                progress and the condition of their vehicles. User decision-making while participating is facilitated by
+                this. Players
+                can alter the volume of the music, sound effects, and display resolutions as well as turn them on or off
+                from the
+                settings page. The player's selection is displayed both verbally and visually in addition to the
+                feedback being provided
+                in audio form (the music stops or begins right away, no music, muted, and all). Additionally, a bar that
+                fills up as the
+                player sustains damage allows players to see their own damage in the game.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>More real-time data could be added to the game to better user experience, such as speed, fuel, or time
+                left for
+                power-ups. It may also indicate how long you must wait for the powerup effects to take action.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Implementation of more specific features
+            to make it a more
+            riveting
+            gameplay experience. Maybe
+            adding a powerup
+            time counter can help players.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Match between system and the real world</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;color: orange;"><b>Positive :</b></p>
+              <p>The inclusion of various car types, maps, power-ups, car damage and its effect on performance, and
+                other features makes
+                the game more realistic and interesting. Because the game mimics the dynamics of real-world racing,
+                players can connect
+                to it better.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>There may still be some realistic components missing from the game, such as weather, tyre wear, or
+                fuel consumption,
+                which could improve immersion and reality even more.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Adding options which will impact gameplay based on
+            weather conditions and fuel left in the car.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>User control and freedom</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>Numerous customization choices are available in the redesigned game, including choice of car, color,
+                starting location,
+                and preferred control scheme (arrow/WASD keys). The settings button gives users more control and freedom
+                by allowing
+                them to handle visual and audio elements. By selecting the back button in the menu, players can go back
+                to the previous
+                screen at any moment. By pressing the designated quit button while playing, they can also end the game
+                and return to the
+                main interface. While the game is operating, users can pause it and make the necessary adjustments to
+                their input
+                preferences as well as to settings like resolution and music.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>In order to help players rapidly correct errors and increase user control and freedom, the game could
+                use an undo or
+                restart feature. The pause screen might include a restart button that would let players restart games
+                without quitting
+                and beginning over.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Implementation of a restart button in the pause
+            window so
+            that players can restart the game if they want to.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Consistency and standards</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>The game's redesigned dashboard and user interface (UI) are aesthetically appealing and easy to use
+                thanks to consistent
+                design patterns. Users can now explore and engage with the game more quickly thanks to this improvement.
+                To avoid
+                confusing players, the game's design maintains both internal and external consistency. In order to
+                maintain internal
+                consistency, the backgrounds and buttons are all of a similar design, with the blue background and
+                orange buttons
+                creating a pleasing contrast to enhance the visuals. Because these games typically take either WSAD or
+                arrow keys as a
+                method of control, we adopted them for high external consistency. Players can choose either method as
+                they please
+                without having to pick up any new skills.
+                Also, buttons are named properly. ‘Back’ button means going to the previous page, while the ‘Quit’
+                button indicates
+                quitting or exiting the game.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>Certain interactive or visual components might be inconsistent, which could confuse players or make the
+                game less
+                intuitive. While we switch between the various maps and cars, the side arrows stay white. When they
+                reach the finish, a
+                faint red outline is emitted.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Implementing different colors for the side arrows to
+            indicate that the user has reached the end. Or an implementation
+            that can provide an endless scrolling option that would negate the use of such.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Error prevention</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>Numerous features that help prevent errors and improve the general gaming experience have been added to
+                the newly
+                redesigned game. Players can, for example, enable/disable animations for more fluid gaming and
+                personalise controls
+                (arrow/WASD keys) based on their tastes by clicking the settings button. A more consistent gameplay
+                experience is also
+                made possible by the inclusion of appropriate animations and an improved UI design, which lowers the
+                possibility of
+                mistakes.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>Even though the user experience has been greatly enhanced by the new game features, there may still be
+                some places where
+                error prevention can be improved even more. For instance, players may unintentionally select the
+                incorrect vehicle, map,
+                or power-up as a result of a misclick or a failure to understand the available choices.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Introducing confirmation prompts when players make
+            critical
+            choices, such as selecting a car, map, or power-up, can help
+            prevent accidental selections. By asking players to confirm their choices, the game can ensure that players
+            are making
+            conscious decisions and reduce the likelihood of errors.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Recognition rather than recall</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>Numerous cues are present throughout the user interface to ease the workload and aid in player memory
+                of the usefulness.
+                Users' cognitive load is lessened by the new game's end screen, which displays player rankings; this
+                eliminates the need
+                for users to recall their performance metrics. The player can easily use a "Back" button while
+                navigating through the
+                pages to go back to the prior page. The user interface is also made so that it is clear to the
+                participant which buttons
+                are interactive. When the user hovers
+                over the button, the colour changes to black letters on an orange backdrop from the normal button's
+                white text on a
+                sky-blue background.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>The game may not provide enough in-game cues or reminders for certain actions or objectives, making it
+                harder for users
+                to remember and utilize certain features or strategies.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Introducing confirmation prompts when players make
+            critical
+            choices, such as selecting a car, map, or power-up, can help
+            prevent accidental selections. By asking players to confirm their choices, the game can ensure that players
+            are making
+            conscious decisions and reduce the likelihood of errors.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Flexibility and efficiency of use</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>The addition of single and dual-player modes, as well as the option to change window resolution for
+                older devices,
+                caters to a wider range of user needs and preferences, making the game more versatile and efficient.
+                Also, players can
+                choose from 10 different maps and 5 different cars to tailor make their game experience.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>The game could benefit from customizable difficulty levels, more control options, or support for
+                different input devices
+                to further improve flexibility and efficiency for diverse users.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Option to add more control methods, such as a
+            controller
+            can be explored in the future, along with adding keyboard
+            shortcuts for common actions.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Aesthetic and minimalist design</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>The updated game's appropriate animations and aesthetically pleasing design enhance gameplay enjoyment
+                and immersion.
+                The game's user interface, map and vehicle selection windows, and main menu all adhere to a minimalist
+                design that
+                restricts the addition of an excessive amount of superfluous information. The current game has four
+                options on the home
+                screen, displaying the user the settings, the hints, the credits, and lastly the race option, in
+                contrast to the
+                original games' more cluttered menu options. There is no unused area and every button or key in the game
+                serves its
+                purpose. The entire game has a neat appearance and a unified design.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>Some design elements might be excessively intricate or crowded, which would take away from the game's
+                overall aesthetic
+                or make it more difficult for players to concentrate on crucial gameplay mechanics. The individual stats
+                are displayed
+                too closely together in-game, and the white in-game text clashes horribly with any possible
+                light-colored backgrounds on
+                maps. Additionally, the credits window can be moved from the home page to another location because not
+                everyone will
+                like it there.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Changing the in-game text to be dark when the player
+            is
+            playing a map which has a light background. Possibly changing or
+            removing the credits button in future iterations of the game, depending on wider feedback.</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Help users recognize, diagnose, and recover from errors</b>
+          </p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>Users can identify when their vehicle has been damaged and look for power-ups for recovery thanks to
+                the new game's car
+                damage system that affects performance. Additionally, users can see any damage that has been done to the
+                car directly on
+                the body of the vehicle if it has been damaged in any manner. When a car is damaged, users will also
+                observe a drop in
+                speed and general performance. Additionally, players can access the previous page from any screen if
+                they want to return
+                and make changes to their preferences or continue with alternative options.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>If a player feels they did not perform well in the game, they cannot repeat it. They have to leave and
+                re-enter the game
+                to restart it, which is ineffective. When players experience system errors like not having particular
+                game libraries
+                installed, there is also no error message and no recovery suggestion messages displayed.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Providing a dedicated restart button to restart the
+            game,
+            thus eliminating the need of not have to start the whole game
+            from scratch</p>
+        </div>
+      </div>
+
+      <div class="evaluation-content">
+        <div class="evaluation-content-container">
+          <p style="font-size: 20px;font-style: italic;"><b>Help and documentation</b></p>
+          <div class="pos-neg-container">
+            <div class="positive">
+              <p style="text-decoration: underline;color: orange;"><b>Positive :</b></p>
+              <p>The various customization options and settings enable users to tailor their gameplay experience,
+                reducing the need for
+                extensive documentation or help. The settings window has clear buttons labelled which help even the most
+                basic of users
+                to understand their functionality. The game provides a ‘Hint’ window which explains to first time users
+                about the four
+                distinct power-ups that are being used in the game.</p>
+            </div>
+            <div class="negative">
+              <p style="text-decoration: underline;color: #007597;"><b>Negative :</b></p>
+              <p>The game may lack proper help or documentation, such as error recovery and such in case the game is
+                facing any error.
+                There is also not enough guidance on the race settings customization options , where the player can
+                select the number of
+                enemy cars, their amount and their color.
+              </p>
+            </div>
+          </div>
+          <p style="text-align: center;"><b><u>Remedy:</u></b> <br> Provide a dedicated document listing the various
+            types of
+            errors that the players may encounter, along with their
+            solutions. Refining the ‘Hints’ window to explain about the various customization options provided to
+            players, such as
+            about the various race settings options.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation" id="recommendations">
+      <div class="recommendation-heading">
+        <h1>Recommendations</h1>
+      </div>
+      <div class="recommendation-content">
+        <div class="myDIV">1. More diverse game modes</div>
+        <div class="hide">More game options, like time trial, elimination, and drift challenges, can give players a more
+          interesting and varied
+          experience. These modes can be incorporated into both single-player and multiplayer modes, enabling players to
+          challenge
+          each other or themselves. A career or story option with a progression system can also give the game more
+          complexity and
+          boost long-term player retention.</div>
+
+        <div class="myDIV">2. Options for users to play their own music</div>
+        <div class="hide">Enhancing personalization and immersion can be accomplished by allowing players to import and
+          perform their own music. A
+          user's local music files could be accessed by an in-game music player, or the functionality could be
+          implemented by
+          integrating with well-liked music streaming services. After that, players can make their own unique playlists
+          to listen
+          to while racing, personalising and improving the gameplay experience.</div>
+
+        <div class="myDIV">3. Adding option for enabling gameplay via controllers:</div>
+        <div class="hide">Accessibility can be increased by providing support for a variety of gameplay controllers,
+          such as Xbox and PlayStation
+          controllers. Giving players the choice to use controllers instead of keyboard controls can make gameplay more
+          welcoming
+          and comfortable for all players. Additionally, the game
+          ought to have a controller mapping function that enables users to alter the button layout to suit their
+          tastes.</div>
+
+        <div class="myDIV">4. More advanced settings options</div>
+        <div class="hide">Increasing the number of settings choices can better accommodate various player preferences
+          and hardware setups. This
+          may entail including advanced graphics options that enable players with various hardware configurations to
+          optimize the
+          efficiency of the game, such as texture quality, anti-aliasing, and shadow detail. Other advanced settings
+          might enable
+          players to reassign keys to their preferred layout and change the camera angle or field of view while playing,
+          resulting
+          in a more individualized experience.</div>
+
+
+      </div>
+    </div>
+
+    <div class="github-link">
+      <a href="https://github.com/uwohci23/group-28">Github Link</a>
+    </div>
+
+
+
+  </div>
+
+  <script>
+    function currentDiv(n) {
+      showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      if (n > x.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = x.length }
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+      }
+      x[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " w3-opacity-off";
+    }
+
+    magnify("myimage", 4);
+
+    var slideIndex1 = 1;
+    showDivs1(slideIndex1);
+
+    function plusDivs(n) {
+      showDivs1(slideIndex1 += n);
+    }
+
+    function showDivs1(n) {
+      var i;
+      var x = document.getElementsByClassName("myslide-car");
+      if (n > x.length) { slideIndex1 = 1 }
+      if (n < 1) { slideIndex1 = x.length }
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      x[slideIndex1 - 1].style.display = "block";
+    }
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
