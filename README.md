@@ -29,4 +29,8 @@ To run the game, follow the steps mentioned below:
 
 *The music and sfx volume is muted by default due to cx_Freeze. Please go to the settings tab in the game and increase the volume for a more immersive experience*.
 
+## **Old_Game**
+
+It contains the files of the game upon which we have made significant changes and imporvements
+
 
