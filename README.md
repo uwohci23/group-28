@@ -31,6 +31,7 @@ To run the game, follow the steps mentioned below:
 
 ## **Old_Game**
 
-It contains the files of the game upon which we have made significant changes and imporvements
+It contains the files of the game upon which we have made significant changes and improvements
 
-
+## **Game running information**
+*The game is designed using pygame, and is supported on Windows based systems (Windows 7/10/11).*
